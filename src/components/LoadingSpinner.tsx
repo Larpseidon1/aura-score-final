@@ -19,7 +19,7 @@ export function LoadingSpinner({ size = 'md', className = '', variant = 'default
       // Preload desktop sky image
       const skyImg = document.createElement('img');
       skyImg.onload = () => setSkyImageLoaded(true);
-      skyImg.src = '/sky-background-desktop.jpg';
+      skyImg.src = '/Sky_4k%201.jpg';
 
       // Preload mobile sky image
       const skyMobileImg = document.createElement('img');
@@ -78,7 +78,7 @@ export function LoadingSpinner({ size = 'md', className = '', variant = 'default
               skyMobileLoaded ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
-              backgroundImage: 'url(/sky-background-desktop.jpg)',
+              backgroundImage: 'url(/Sky_4k%201.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               backgroundRepeat: 'no-repeat',
@@ -91,7 +91,7 @@ export function LoadingSpinner({ size = 'md', className = '', variant = 'default
             skyImageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
-            backgroundImage: 'url(/sky-background-desktop.jpg)',
+            backgroundImage: 'url(/Sky_4k%201.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
             backgroundRepeat: 'no-repeat',

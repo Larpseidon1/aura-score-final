@@ -259,7 +259,7 @@ export function Dashboard() {
           backgroundsReady ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
-          backgroundImage: 'url(/sky-background-desktop.jpg)',
+          backgroundImage: 'url(/Sky_4k%201.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
