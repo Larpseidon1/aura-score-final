@@ -55,7 +55,7 @@ const renderCategoryBadges = (project: CryptoProject) => (
 
 // Project logos mapping
 const projectLogos: Record<string, string> = {
-  'Hyperliquid': '/Hyperliquid Profile Image (2).png',
+  'Hyperliquid': '/hyperliquid-logo.png',
   'Ethereum': '/Ethereum Profile Image.jpg',
   'Solana': '/Solana Profile Image.jpg',
   'Tron': '/TRON DAO Profile Image.jpg',
