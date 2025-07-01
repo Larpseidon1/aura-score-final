@@ -307,6 +307,12 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+  
+  /* Remove sky background on mobile */
+  .sky-background-desktop {
+    background: white !important;
+    background-image: none !important;
+  }
 }
 
 /* Enhanced Sky Background Effects */
@@ -349,6 +355,49 @@
     linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%);
   background-size: 50px 50px, 80px 80px, 60px 60px, 20px 20px, 25px 25px;
   background-position: 0 0, 40px 40px, 20px 20px, 0 0, 12px 12px;
+}
+
+/* Desktop Sky Background - Hidden on Mobile */
+@media (min-width: 769px) {
+  .sky-background-desktop {
+    background: linear-gradient(
+      135deg,
+      rgba(135, 206, 235, 0.2) 0%,
+      rgba(152, 216, 232, 0.15) 20%,
+      rgba(182, 229, 240, 0.1) 40%,
+      rgba(199, 236, 252, 0.15) 60%,
+      rgba(216, 243, 255, 0.2) 80%,
+      rgba(233, 249, 255, 0.25) 100%
+    ),
+    url('/sky-4k-optimized.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+  }
+  
+  .sky-background-desktop::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .sky-background-desktop > * {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 /* Chart animations */
