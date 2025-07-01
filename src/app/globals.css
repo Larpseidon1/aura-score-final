@@ -360,21 +360,23 @@
 /* Desktop Sky Background - Hidden on Mobile */
 @media (min-width: 769px) {
   .sky-background-desktop {
-    background: linear-gradient(
+    background: 
+    linear-gradient(
       135deg,
-      rgba(135, 206, 235, 0.2) 0%,
-      rgba(152, 216, 232, 0.15) 20%,
-      rgba(182, 229, 240, 0.1) 40%,
-      rgba(199, 236, 252, 0.15) 60%,
-      rgba(216, 243, 255, 0.2) 80%,
-      rgba(233, 249, 255, 0.25) 100%
+      rgba(135, 206, 235, 0.3) 0%,
+      rgba(152, 216, 232, 0.25) 20%,
+      rgba(182, 229, 240, 0.2) 40%,
+      rgba(199, 236, 252, 0.25) 60%,
+      rgba(216, 243, 255, 0.3) 80%,
+      rgba(233, 249, 255, 0.35) 100%
     ),
-    url('/sky-4k-optimized.jpg');
+    url('/sky-background-desktop.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     position: relative;
+    min-height: 100vh;
   }
   
   .sky-background-desktop::before {
@@ -386,9 +388,9 @@
     bottom: 0;
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 50%,
-      rgba(255, 255, 255, 0.1) 100%
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(255, 255, 255, 0.05) 100%
     );
     pointer-events: none;
     z-index: 1;
