@@ -372,5 +372,4 @@
 
 .animate-pulse-slow {
   animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-} /* Force rebuild Tue Jul  1 21:38:56 MSK 2025 */
-// Force deployment with Sky_4k 1.jpg background Tue Jul  1 21:50:25 MSK 2025
+}
