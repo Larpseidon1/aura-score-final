@@ -19,12 +19,12 @@ export function LoadingSpinner({ size = 'md', className = '', variant = 'default
       // Preload desktop sky image
       const skyImg = document.createElement('img');
       skyImg.onload = () => setSkyImageLoaded(true);
-      skyImg.src = '/sky-4k.png';
+      skyImg.src = '/sky-background-desktop.jpg';
 
       // Preload mobile sky image
       const skyMobileImg = document.createElement('img');
       skyMobileImg.onload = () => setSkyMobileLoaded(true);
-      skyMobileImg.src = '/sky-4k.png';
+      skyMobileImg.src = '/sky-background-mobile.png';
     }
   }, [variant]);
 
@@ -78,7 +78,7 @@ export function LoadingSpinner({ size = 'md', className = '', variant = 'default
               skyMobileLoaded ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
-              backgroundImage: 'url(/sky-4k.png)',
+              backgroundImage: 'url(/sky-background-desktop.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               backgroundRepeat: 'no-repeat',
@@ -91,7 +91,7 @@ export function LoadingSpinner({ size = 'md', className = '', variant = 'default
             skyImageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
-            backgroundImage: 'url(/sky-4k.png)',
+            backgroundImage: 'url(/sky-background-desktop.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
             backgroundRepeat: 'no-repeat',

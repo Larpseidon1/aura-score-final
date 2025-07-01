@@ -36,6 +36,14 @@
     margin: 0;
     padding: 0;
   }
+  
+  /* Ensure mobile background is white and overrides any background images */
+  @media (max-width: 768px) {
+    main {
+      background: white !important;
+      background-image: none !important;
+    }
+  }
 }
 
 @layer components {
