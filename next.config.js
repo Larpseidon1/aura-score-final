@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+  trailingSlash: false,
   images: {
-    domains: ['hypeburn.fun', 'localhost'],
-    unoptimized: true
+    unoptimized: false,
+    domains: ['localhost'],
+    formats: ['image/webp', 'image/avif'],
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -12,6 +15,19 @@ const nextConfig = {
   },
   env: {
     CUSTOM_KEY: process.env.CUSTOM_KEY,
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
   },
 }
 
