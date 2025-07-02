@@ -1,11 +1,29 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  trailingSlash: false,
+  reactStrictMode: true,
   images: {
-    unoptimized: false,
     domains: ['localhost'],
-    formats: ['image/webp', 'image/avif'],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+  // Optimize production builds
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  // Enable static exports for better Vercel performance
+  output: 'standalone',
+  // Compress output
+  compress: true,
+  // Optimize fonts
+  optimizeFonts: true,
+  // Reduce JavaScript bundle size
+  productionBrowserSourceMaps: false,
+  // Experimental features for better performance
+  experimental: {
+    optimizeCss: true,
   },
   eslint: {
     ignoreDuringBuilds: true,

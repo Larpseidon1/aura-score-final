@@ -39,22 +39,5 @@ next-env.d.ts
 *.log
 server.log
 
-# Large image files
-*.jpg
-*.png
-*.jpeg
-*.gif
-*.svg
-!public/favicon.ico
-!public/apple-store-coming-soon.svg
-!public/google-store-coming-soon.svg
-!public/telegram-icon.svg
-!public/tiktok-icon.svg
-!public/twitter-x-icon.svg
-!public/website-icon.svg
-
-# Keep only essential small images
-!public/*Profile*.jpg
-!public/*Profile*.png
-!public/*Logo*.jpg
-!public/*Logo*.png 
+# Don't ignore any public assets - they need to be deployed
+# All images in public folder should be tracked 

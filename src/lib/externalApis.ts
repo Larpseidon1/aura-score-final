@@ -442,6 +442,56 @@ export async function enrichAllProjects(baseProjects: CryptoProject[]): Promise<
               };
             }
             
+            // Special handling for Hyperliquid - needs both chain AND protocol revenue
+            if (project.name === 'Hyperliquid') {
+              console.log(`🚀 Special handling for Hyperliquid - fetching both chain and protocol revenue`);
+              
+              // Fetch chain revenue (ecosystem apps revenue)
+              const chainRevenue = await fetchChainRevenue('hyperliquid-l1');
+              
+              // Fetch protocol revenue (Hyperliquid's own revenue)
+              let protocolRevenue = 0;
+              try {
+                const protocolResponse = await fetch(`https://api.llama.fi/summary/fees/hyperliquid`);
+                if (protocolResponse.ok) {
+                  const protocolData = await protocolResponse.json();
+                  
+                  // Use 30d data if available, fallback to 7d×52, then 24h×365
+                  if (protocolData.total30d) {
+                    protocolRevenue = protocolData.total30d * 12;
+                    console.log(`✅ Hyperliquid protocol: $${protocolRevenue.toLocaleString()} annual revenue (30d total × 12)`);
+                  } else if (protocolData.total7d) {
+                    protocolRevenue = protocolData.total7d * 52;
+                    console.log(`✅ Hyperliquid protocol: $${protocolRevenue.toLocaleString()} annual revenue (7d total × 52)`);
+                  } else if (protocolData.total24h) {
+                    protocolRevenue = protocolData.total24h * 365;
+                    console.log(`✅ Hyperliquid protocol: $${protocolRevenue.toLocaleString()} annual revenue (24h × 365)`);
+                  }
+                } else {
+                  console.log(`❌ Failed to fetch Hyperliquid protocol revenue: ${protocolResponse.status}`);
+                }
+              } catch (error) {
+                console.error(`❌ Error fetching Hyperliquid protocol revenue:`, error);
+              }
+              
+              const ecosystemRevenue = chainRevenue || 0;
+              const totalAnnualizedRevenue = ecosystemRevenue + protocolRevenue;
+              
+              console.log(`💎 Hyperliquid breakdown:`);
+              console.log(`   - Ecosystem (chain) revenue: $${ecosystemRevenue.toLocaleString()}`);
+              console.log(`   - Protocol revenue: $${protocolRevenue.toLocaleString()}`);
+              console.log(`   - Total annualized revenue: $${totalAnnualizedRevenue.toLocaleString()}`);
+              
+              return {
+                ...project,
+                ecosystemRevenue: ecosystemRevenue,
+                appFees: protocolRevenue,  // Store protocol revenue as appFees for display
+                annualizedRevenue: totalAnnualizedRevenue,
+                annualizedAppFees: protocolRevenue
+              };
+            }
+            
+            // Regular handling for other L1/L2 projects
             // Fetch both chain revenue and app fees (now returns annualized values)
             const [annualizedRevenue, annualizedAppFees] = await Promise.all([
               fetchChainRevenue(chainSlug),
