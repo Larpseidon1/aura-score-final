@@ -17,6 +17,7 @@ interface CryptoProject {
   fdv?: number;
   returnVsFunding?: number;
   returnSinceTGE?: number;
+  ecosystemRevenue?: number;
 }
 
 interface ComparisonData {
@@ -118,9 +119,9 @@ export function InfrastructureComparison({ className = '' }: InfrastructureCompa
 
   const calculateAuraScore = (project: CryptoProject): ProjectWithAuraScore => {
     const annualizedRevenue = project.annualizedRevenue || 0;
-    const annualizedAppFees = project.annualizedAppFees || 0;
+    const ecosystemRevenue = project.ecosystemRevenue || 0;
     const amountRaised = project.amountRaised;
-
+    
     // Calculate weighted revenue based on project type
     let weightedAnnualRevenue = 0;
     
@@ -131,8 +132,8 @@ export function InfrastructureComparison({ className = '' }: InfrastructureCompa
       // L1/L2 Infrastructure: Native revenue gets 100% weight, ecosystem fees get 70% weight
       // This favors projects that generate revenue themselves vs just collecting from ecosystem
       const nativeRevenue = annualizedRevenue * 1.0;        // 100% weight for direct chain revenue
-      const ecosystemRevenue = annualizedAppFees * 0.7;      // 70% weight for ecosystem app fees
-      weightedAnnualRevenue = nativeRevenue + ecosystemRevenue;
+      const ecosystemRevenueWeighted = ecosystemRevenue * 0.7;      // 70% weight for ecosystem app fees
+      weightedAnnualRevenue = nativeRevenue + ecosystemRevenueWeighted;
     }
 
     let auraScore = 0;
@@ -599,9 +600,9 @@ export function InfrastructureComparison({ className = '' }: InfrastructureCompa
       <div className="block lg:hidden space-y-0">
         {projectsWithAura.map((project, index) => {
           const annualizedRevenue = project.annualizedRevenue || 0; 
-          const annualizedAppFees = project.annualizedAppFees || 0;
+          const ecosystemRevenue = project.ecosystemRevenue || 0;
           const hasRevenue = annualizedRevenue > 0;
-          const hasAppFees = annualizedAppFees > 0;
+          const hasEcosystemRevenue = ecosystemRevenue > 0;
           const rank = index + 1;
 
           return (
@@ -672,11 +673,11 @@ export function InfrastructureComparison({ className = '' }: InfrastructureCompa
                     </p>
                   </div>
                 )}
-                {hasAppFees && (
+                {hasEcosystemRevenue && (
                   <div>
                     <p className="text-gray-500 font-medium mb-1">Ecosystem Rev.</p>
                     <p className="text-indigo-600 font-semibold">
-                      {formatCurrency(annualizedAppFees)}
+                      {formatCurrency(ecosystemRevenue)}
                     </p>
                   </div>
                 )}
@@ -758,9 +759,9 @@ export function InfrastructureComparison({ className = '' }: InfrastructureCompa
             <tbody>
               {projectsWithAura.map((project, index) => {
                 const annualizedRevenue = project.annualizedRevenue || 0; 
-                const annualizedAppFees = project.annualizedAppFees || 0;
+                const ecosystemRevenue = project.ecosystemRevenue || 0;
                 const hasRevenue = annualizedRevenue > 0;
-                const hasAppFees = annualizedAppFees > 0;
+                const hasEcosystemRevenue = ecosystemRevenue > 0;
                 const rank = index + 1;
 
                                 return (
@@ -848,9 +849,9 @@ export function InfrastructureComparison({ className = '' }: InfrastructureCompa
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
-                      {hasAppFees ? (
+                      {hasEcosystemRevenue ? (
                         <span className="text-indigo-600 font-semibold">
-                          {formatCurrency(annualizedAppFees)}
+                          {formatCurrency(ecosystemRevenue)}
                         </span>
                       ) : (
                         <span className="text-gray-400 italic">

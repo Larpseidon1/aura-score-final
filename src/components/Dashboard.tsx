@@ -21,6 +21,7 @@ interface CryptoProject {
   dailyAppFees?: number;
   annualizedRevenue?: number;
   annualizedAppFees?: number;
+  ecosystemRevenue?: number;
 }
 
 interface ProjectWithAuraScore extends CryptoProject {
@@ -101,11 +102,11 @@ export function Dashboard() {
       // Apps: 100% weight for native revenue (they generate their own fees directly)
       weightedAnnualRevenue = annualizedRevenue * 1.0;
     } else {
-      // L1/L2 Infrastructure: Native revenue gets 100% weight, ecosystem fees get 70% weight
+      // L1/L2/L3 Infrastructure: Native revenue gets 100% weight, ecosystem fees get 70% weight
       // This favors projects that generate revenue themselves vs just collecting from ecosystem
       const nativeRevenue = annualizedRevenue * 1.0;        // 100% weight for direct chain revenue
-      const ecosystemRevenue = annualizedAppFees * 0.7;      // 70% weight for ecosystem app fees
-      weightedAnnualRevenue = nativeRevenue + ecosystemRevenue;
+      const ecosystemRevenueWeighted = (project.ecosystemRevenue || 0) * 0.7;      // 70% weight for ecosystem app fees
+      weightedAnnualRevenue = nativeRevenue + ecosystemRevenueWeighted;
     }
 
     let auraScore = 0;
